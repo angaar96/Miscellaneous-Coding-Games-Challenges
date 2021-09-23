@@ -1,4 +1,4 @@
-# The-Lucky-Number-Codingame-Challenge
+# The Lucky Number: Codingame Challenge
 
 This challenge is available here: https://www.codingame.com/ide/puzzle/the-lucky-number
 
