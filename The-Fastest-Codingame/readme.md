@@ -1,4 +1,4 @@
-# The-Fastest-Codingame-Challenge
+# The Fastest : Codingame Challenge
 
 This challenge is available at: https://www.codingame.com/ide/puzzle/the-fastest
 
