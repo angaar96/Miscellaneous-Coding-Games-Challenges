@@ -1,9 +1,8 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Solution {
@@ -21,25 +20,44 @@ public class Solution {
         bracketsHashMap.put("[", "]");
         bracketsHashMap.put("(", ")");
 
+        // Needed as there is no easy way to grab a key from a value.
+
         HashMap <String,String> bracketsHashMapReversed = new HashMap<>();
         bracketsHashMapReversed.put("}","{");
         bracketsHashMapReversed.put("]","[");
         bracketsHashMapReversed.put(")", "(");
 
-        ArrayList<String> closingBracketsArr = onlyBracketsArr.stream().filter(letter -> bracketsHashMap.values().contains(letter)).collect(Collectors.toCollection(ArrayList::new));
-        ArrayList<String> openingBracketsArr = onlyBracketsArr.stream().filter(letter -> bracketsHashMap.keySet().contains(letter)).collect(Collectors.toCollection(ArrayList::new));
-        // If the number of opening brackets does not match the number of closing ones, then the nesting is incorrect as there is an unclosed or unopened bracket somewhere.
-        if (closingBracketsArr.size() != openingBracketsArr.size()) {
+//        If the number of opening brackets does not match the number of closing ones, then the nesting is incorrect as there is an unclosed or unopened bracket somewhere.
+
+//        ArrayList<String> closingBracketsArr = onlyBracketsArr.stream().filter(letter -> bracketsHashMap.values().contains(letter)).collect(Collectors.toCollection(ArrayList::new));
+//        ArrayList<String> openingBracketsArr = onlyBracketsArr.stream().filter(letter -> bracketsHashMap.keySet().contains(letter)).collect(Collectors.toCollection(ArrayList::new));
+//        if (closingBracketsArr.size() != openingBracketsArr.size()) {
+//            System.out.println("false");
+//            return false;
+//        }
+
+        // Easier way to check if number of opening brackets matches number of closing brackets - they will come as pairs if correct, therefore the total number of brackets must always be even.
+        if (onlyBracketsArr.size() % 2 != 0) {
             return false;
         }
-        for (int i=0; i<onlyBracketsArr.size(); i++) {
-            // We need to check if an opening bracket element is followed by a closing bracket that is of a different type, i.e. if "(" is followed by "]", then the nesting is incorrect.
-            if (bracketsHashMap.containsKey(onlyBracketsArr.get(i)) && bracketsHashMap.containsValue(onlyBracketsArr.get(i+1))) {
-                if (!onlyBracketsArr.get(i).equals(bracketsHashMapReversed.get(onlyBracketsArr.get(i+1)))) {
-                    return false;
-                }
+
+        // A stack is the best data structure for this problem. A stack is a linear data structure which performs operations in a LIFO (Last in , first out) order and holds a list of elements.
+        // This means that the most recently added element is the first element to be removed. A stack has two main operations that occur only at the TOP of the stack - push and pop.
+        Stack<String> closingBracketsStack = new Stack<>();
+        for (String bracket: onlyBracketsArr) {
+            if (bracketsHashMap.containsKey(bracket)) {
+                closingBracketsStack.push(bracket);
+            } else if (closingBracketsStack.size() > 0 && closingBracketsStack.peek().equals(bracketsHashMapReversed.get(bracket))) {
+                closingBracketsStack.pop();
+            } else {
+                System.out.println(false);
+                return false;
             }
         }
-        return true;
+        // If there is nothing left in the stack, then all the opening brackets were matched with a corresponding closing bracket and the expression is properly nested.
+        return closingBracketsStack.size() == 0;
+
+        }
     }
-}
+
+
