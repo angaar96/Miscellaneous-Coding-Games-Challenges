@@ -12,8 +12,9 @@ public class Solution {
     public boolean checkIfNested (String inputString) {
         // Split the input string into an array.
         List<String> splitStringArr = Arrays.asList(inputString.split(""));
-        // Use a regex search pattern to filter out all elements of the array that are not brackets.
-        ArrayList<String> onlyBracketsArr = splitStringArr.stream().filter(character -> character.matches("[()\\[\\]{}]")).collect(Collectors.toCollection(ArrayList::new));
+        // Use a regex search pattern to filter out all elements of the array that are not brackets - no need in this variation of the problem
+//      ArrayList<String> onlyBracketsArr = splitStringArr.stream().filter(character -> character.matches("[()\\[\\]{}]")).collect(Collectors.toCollection(ArrayList::new));
+        List<String> onlyBracketsArr = splitStringArr;
         // Initialise lookup tables for the brackets.
         HashMap <String,String> bracketsHashMap = new HashMap<>();
         bracketsHashMap.put("{", "}");

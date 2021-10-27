@@ -67,16 +67,6 @@ public class AppTest
     }
 
     @Test
-    public void CorrectlyNestedString_WithCharactersThatArentBrackets_ShouldReturnTrue() {
-        // 1. Arrange (your dependencies)
-        Solution solution = new Solution();
-        // 2. Act (call the methods)
-        boolean answer = solution.checkIfNested("{(example)[55]example}");
-        // 3. Assert (Check the results are what you expect).
-        assertEquals(true,answer);
-    }
-
-    @Test
     public void DifferentCorrectlyNestedString_ShouldReturnTrue() {
         // 1. Arrange (your dependencies)
         Solution solution = new Solution();
