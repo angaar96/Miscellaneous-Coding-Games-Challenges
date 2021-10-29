@@ -4,7 +4,7 @@ const numberOfValidWords = (sentence) => {
   validWordsArr = [];
   let requirements = [true, true, true, true]; 
   splitStringArr.forEach(word => {
-    requirements = [true,true,true,true]
+    requirements = [true,true,true,true]; 
     if (word.match(/[^a-z\-!., ]/g) || word === "") {
       // console.log("not a valid word");
     } else if (word == "-") {
