@@ -2,8 +2,8 @@ class Solution {
     public String addBinary(String a, String b) {
         ArrayList<String> answerArr = new ArrayList<>();
         int carry = 0;
-        if (a.length() > b.length()) {
-            String longestString = a.length > b.length ? a : b;
+        if (a.length() != b.length()) {
+            String longestString = a.length() > b.length() ? a : b;
             if (longestString == a) {
                 b = "0".repeat(a.length()-b.length()) + b;
             } else {
@@ -13,16 +13,16 @@ class Solution {
         System.out.println(a);
         System.out.println(b);
         for (int i = a.length()-1; i>=0; i--) {
-            switch(Integer.parseInt(a[i]) + Integer.parseInt(b[i]) {
+            switch(Integer.parseInt(String.valueOf(a.charAt(i))) + Integer.parseInt(String.valueOf(b.charAt(i)))) {
                 case 2:
                     if (carry == 1) {
                         answerArr.add(0, "1");
-                        carry = 1
+                        carry = 1;
                     } else {
                         carry = 1;
-                        answerArr.add(0, "0")
+                        answerArr.add(0, "0");
                     }
-                    break
+                    break;
                 case 0:
                     if (carry == 1) {
                         answerArr.add(0, "1");
@@ -38,13 +38,14 @@ class Solution {
                         answerArr.add(0, "1");
                     }
                     break;
-
-            })
+                default:
+                    break;
+            }
             if (i == 0 && carry == 1) {
                 answerArr.add(0, "1");
             }
         }
-        System.out.println(answerArr.join(""));
-        return answerArr.join("");
+        System.out.println(String.join("", answerArr));
+        return String.join("", answerArr);
     }
 }
